@@ -1,0 +1,15 @@
+.aws
+.azure
+.cache
+.dotnet
+.docker
+.vscode-remote-containers
+.vscode-server
+.bash_history
+.bash_logout
+.motd_shown
+.wget-hsts
+.gitconfig
+.sudo_as_admin_successful
+.config/zsh/history.txt
+.zcompdump
