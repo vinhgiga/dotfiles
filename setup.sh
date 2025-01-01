@@ -9,22 +9,13 @@ function copyIt() {
   PATTERN="${PATTERN:1}" # Remove the leading "|"
 
   # Use cp and grep with the exclusion pattern.
-  cp -r $(ls | grep -v -E "(${PATTERN})") $HOME
+  cp -r $(ls -A | grep -v -E "(${PATTERN})") $HOME
 
   # Install zsh if it is not already installed
   if ! command -v zsh &> /dev/null; then
     echo "Zsh is not installed. Installing zsh..."
     bash "$HOME/scripts/install-zsh.sh"
   fi
-  # Autostart zsh if bash is the default shell
-  cat <<EOT >> $HOME/.bashrc
-
-if command -v zsh &> /dev/null; then
-  exec zsh
-else
-  exec "$HOME/.local/bin/zsh"
-fi
-EOT
 
   # # Define the files and directories to exclude
   # EXCLUDES=(
@@ -40,6 +31,16 @@ EOT
   # done
   # # Use tar to archive the directory excluding specific files, then extract to $HOME
   # tar -cf - $EXCLUDE_ARGS . | tar -xf - -C "$HOME"
+
+  # Autostart zsh if bash is the default shell
+  cat <<EOT >> $HOME/.bashrc
+
+if command -v zsh &> /dev/null; then
+  exec zsh
+else
+  exec "$HOME/.local/bin/zsh"
+fi
+EOT
 
   echo "Setup complete."
 }
